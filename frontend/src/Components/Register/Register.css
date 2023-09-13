@@ -1,0 +1,55 @@
+.registro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+}
+
+.form-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.registro-content {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    background: rgba(39, 38, 38, 0.683);
+    height: 480px;
+    width: 480px;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.registros {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.register-login {
+    background: #affd06;
+    width: 150px;
+    height: 40px;
+    border: 0;
+    margin-left: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    cursor: pointer;
+}
+
+.login-register {
+    border: none;
+    background: none;
+    color:#affd06
+}
