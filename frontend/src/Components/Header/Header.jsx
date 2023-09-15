@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
-import Register from '../Register/Register.jsx'
 import '../Header/Header.css';
+import Login from '../Login/Login.jsx';
 
 export const Header = () => {
     return (
@@ -31,11 +30,9 @@ function Menu() {
                 <div className="register">
                     <button className="registro-icon" onClick={handleOpenModal}>Login
                     </button>
-                    <Register isOpen={isModalOpen} onClose={handleCloseModal} />
+                    <Login isOpen={isModalOpen} onClose={handleCloseModal} />
                 </div>
-                
             </div>
-
         </div>
     )
 }

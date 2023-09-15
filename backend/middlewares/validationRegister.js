@@ -14,7 +14,6 @@ const validateRegister = [
         }
         return true;
     }),
-    check('role', 'El rol es obligatorio').notEmpty(),
     check('username', 'El nombre de usuario es obligatorio').notEmpty(),
     check('email', 'El correo electrónico no es válido').isEmail(),
     check('password', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un carácter especial')

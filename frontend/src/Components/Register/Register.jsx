@@ -4,9 +4,11 @@ import '../Register/Register.css';
 
 const Register = ({ isOpen, onClose }) => {
   const [datos, setDatos] = useState({
+    firstName: "",
+    lastName: "",
     username: "",
     password: "",
-    email: ""
+    email: "",
   });
 
 
@@ -25,9 +27,11 @@ const Register = ({ isOpen, onClose }) => {
 
   const resetState = () => {
     setDatos({
+      firstName: "",
+      lastName: "",
       username: "",
       password: "",
-      email: ""
+      email: "",
     });
     setError('');
     setSuccess('');
@@ -104,13 +108,14 @@ const Register = ({ isOpen, onClose }) => {
     <div className="registro">
       <div className="registro-content">
         <div className="registration">
-          <h2 className="registration">{isLogin ? 'Inicio de sesión' : 'Registro'}</h2>
           <button className="registration-x" onClick={() => {
             resetState();
             onClose();
           }}>
             x
           </button>
+          <h2 className="registration">{isLogin ? 'Inicio de sesión' : 'Registro'}</h2>
+
         </div>
         <form className='form-register' onSubmit={(e) => handleSubmit(e)} >
           <label className="registros">

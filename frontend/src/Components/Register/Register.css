@@ -21,7 +21,7 @@
     align-items: center; 
     height: 100vh;
     background: rgba(39, 38, 38, 0.683);
-    height: 480px;
+    height: 500px;
     width: 480px;
     font-family:'Courier New', Courier, monospace;
 }
@@ -51,5 +51,19 @@
 .login-register {
     border: none;
     background: none;
-    color:#affd06
+    color:#affd06;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.registration-x {
+    position: absolute;
+    margin-left: 260px;
+    height: 50px;
+    border: none;
+    background: none;
+    color:#affd06;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
 }

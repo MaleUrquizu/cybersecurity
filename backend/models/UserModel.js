@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
         },
         roles: [
             {
-                /*ref: "Role",*/
+                ref: "Role",
                 defaut: "user",
                 type: Schema.Types.ObjectId
             }

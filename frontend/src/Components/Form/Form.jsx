@@ -154,7 +154,7 @@ function Form() {
 
     setFormErrors(errors);
 
-    return Object.keys(errors).length === 0; // Si no hay errores, la validación es exitosa
+    return Object.keys(errors).length === 0; 
   };
 
   const handleSubmit = async (event) => {
