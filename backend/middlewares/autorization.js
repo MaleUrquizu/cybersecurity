@@ -3,7 +3,7 @@ import config from "../config.js";
 import User from "../models/UserModel.js";
 import Role from "../models/RoleModel.js";
 
-export const verifyToken = async (req, res, next) => {
+/*export const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers["x-access-token"];
 
@@ -19,9 +19,9 @@ export const verifyToken = async (req, res, next) => {
     } catch (error) {
         return res.status(401).json({message: "Unauthorized access"})
     }
-};
+};*/
 
-export const isAdmin = async (req, res, next) => {
+/*export const isAdmin = async (req, res, next) => {
     const user = await User.findById(req.userId)
     const roles = await Role.find({_id: {$in: user.roles}})
 
@@ -34,4 +34,55 @@ export const isAdmin = async (req, res, next) => {
     }
 
     return res.status(403).json({message: "Require Admin role"})
+};*/
+
+export const verifyToken = async (req, res, next) => {
+    try {
+        const token = req.headers["x-access-token"];
+        console.log("Token recibido:", token);
+
+        if (!token) {
+            console.log("Token no proporcionado");
+            return res.status(403).json({ message: "Unauthorized access" });
+        }
+
+        const decoded = jwt.verify(token, config.SECRET);
+        req.userId = decoded.id;
+        console.log("Usuario autenticado:", req.userId);
+
+        const user = await User.findById(req.userId, { password: 0 });
+        if (!user) {
+            console.log("Usuario no encontrado");
+            return res.status(404).json({ message: "No user found" });
+        }
+
+        next();
+    } catch (error) {
+        console.error("Error en la verificación del token:", error);
+        return res.status(401).json({ message: "Unauthorized access" });
+    }
 };
+
+// authJwt.js
+export const isAdmin = async (req, res, next) => {
+    const user = await User.findById(req.userId);
+    
+    if (!user) {
+        return res.status(404).json({ message: "No user found" });
+    }
+
+    const roles = await Role.find({ _id: { $in: user.roles } });
+
+    for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "admin") {
+            next();
+            return;
+        }
+    }
+
+    console.log("Usuario no es administrador");
+    return res.status(403).json({ message: "Require Admin role" });
+};
+
+
+

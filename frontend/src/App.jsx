@@ -1,12 +1,15 @@
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom'; 
-import { AppRouter } from './AppRouter';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRouter from './AppRouter.jsx';
+import { AuthProvider } from './Context/AuthContext';
 
 function App() {
   return (
     <div>
-      <Router> 
-        <AppRouter />
+      <Router>
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
       </Router>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { EditModalForm, DeleteModalForm, EditModalUser, DeleteModalUser } from '../Components/Modal/Modal';
+import { EditModalForm, DeleteModalForm, EditModalUser, DeleteModalUser } from '../../Components/Modal/Modal';
+import '../Admin/Admin.css'
 
 function Admin() {
   const [forms, setForms] = useState([]);
@@ -96,7 +97,6 @@ const handleSaveUser = (userId, editedUser) => {
 
   return (
     <div>
-      <h1>ADMIN</h1>
       <div className="form-cards">
         {/* Mostrar formularios */}
         {forms.map((form) => (

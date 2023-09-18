@@ -1,8 +1,11 @@
 body {
-    background-image: url('file:///C:/Users/Administrator/Downloads/fondo%20(1).svg');
+    background-image: url('file:///C:/Users/Administrator/Downloads/matthew-moisant-sIPRbIj9Oo8-unsplash%20(3).svg');
     background-size: cover;
     background-repeat: no-repeat; 
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
+    height: 100vh; 
+    margin: 0; 
+    padding: 0; 
   }
   
 
@@ -20,7 +23,7 @@ body {
     justify-content: center; 
     align-items: center; 
     height: 100vh;
-    background: rgba(39, 38, 38, 0.683);
+    background: rgba(39, 38, 38, 0.888);
     height: 540px;
     width: 480px;
 }
@@ -40,7 +43,7 @@ input {
 }
 
 input:focus {
-    border-bottom: 2px solid #affd06; 
+    border-bottom: 2px solid #fd7d06;
     outline-width: 2px; 
     outline-style: solid; 
   }
@@ -60,13 +63,13 @@ textarea {
 }
 
 textarea:focus {
-    outline-color: #affd06; 
+    outline-color: #fd7d06; 
     outline-width: 2px; 
     outline-style: solid; 
 }
 
 .button-form {
-    background: #affd06;
+    background: #fd7d06;
     width: 300px;
     height: 46px;
     border: 0;

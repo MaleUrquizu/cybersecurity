@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Pages/Pages.css';
+
 
 function User() {
   const [forms, setForms] = useState([]);

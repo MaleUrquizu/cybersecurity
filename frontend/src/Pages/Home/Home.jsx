@@ -1,5 +1,5 @@
-import Form from "../Components/Form/Form.jsx";
-import { Header } from "../Components/Header/Header.jsx";
+import Form from "../../Components/Form/Form.jsx";
+import { Header } from "../../Components/Header/Header.jsx";
 
 export const Home = () => {
     return (

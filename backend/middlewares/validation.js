@@ -17,7 +17,7 @@ export const checkRolesExisted = (req, res, next) => {
         for (let i=0; i< req.body.roles.length; i++) {
             if(!ROLES.includes(req.body.roles[i])) {
                 return res.status(400).json({
-                    message: `Unauthorized acces`
+                    message: `Invalid role`
                 })
             }
         }
