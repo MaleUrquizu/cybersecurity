@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EditModalForm, DeleteModalForm, EditModalUser, DeleteModalUser } from '../../Components/Modal/Modal';
 import '../Admin/Admin.css'
+import { HeaderRegister } from '../../Components/Header/HeaderRegister.jsx';
 
 function Admin() {
   const [forms, setForms] = useState([]);
@@ -51,54 +52,56 @@ function Admin() {
   };
 
   const handleSaveForm = (formId, editedData) => {
-  // Realiza una solicitud HTTP para actualizar el formulario en la base de datos
-  fetch(`http://localhost:8000/form/${formId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(editedData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Actualización exitosa, puedes realizar alguna acción adicional si es necesario
-      } else {
-        // Manejo de errores en caso de que la actualización falle
-        console.error('Error al actualizar el formulario');
-      }
+    // Realiza una solicitud HTTP para actualizar el formulario en la base de datos
+    fetch(`http://localhost:8000/form/${formId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedData),
     })
-    .catch((error) => {
-      console.error('Error al actualizar el formulario:', error);
-    });
-};
+      .then((response) => {
+        if (response.ok) {
+          // Actualización exitosa, puedes realizar alguna acción adicional si es necesario
+        } else {
+          // Manejo de errores en caso de que la actualización falle
+          console.error('Error al actualizar el formulario');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el formulario:', error);
+      });
+  };
 
-const handleSaveUser = (userId, editedUser) => {
-  // Realiza una solicitud HTTP para actualizar el usuario en la base de datos
-  fetch(`http://localhost:8000/auth/users/${userId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(editedUser),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Actualización exitosa, puedes realizar alguna acción adicional si es necesario
-      } else {
-        // Manejo de errores en caso de que la actualización falle
-        console.error('Error al actualizar el usuario');
-      }
+  const handleSaveUser = (userId, editedUser) => {
+    // Realiza una solicitud HTTP para actualizar el usuario en la base de datos
+    fetch(`http://localhost:8000/auth/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedUser),
     })
-    .catch((error) => {
-      console.error('Error al actualizar el usuario:', error);
-    });
-};
+      .then((response) => {
+        if (response.ok) {
+          // Actualización exitosa, puedes realizar alguna acción adicional si es necesario
+        } else {
+          // Manejo de errores en caso de que la actualización falle
+          console.error('Error al actualizar el usuario');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el usuario:', error);
+      });
+  };
 
 
   return (
     <div>
+      <div>
+        <HeaderRegister />
+      </div>
       <div className="form-cards">
-        {/* Mostrar formularios */}
         {forms.map((form) => (
           <div key={form._id} className="form-card">
             <h2>{form.Subject}</h2>
@@ -110,20 +113,22 @@ const handleSaveUser = (userId, editedUser) => {
           </div>
         ))}
       </div>
-
       <div className="user-list">
-        {/* Mostrar usuarios con el rol "user" */}
-        {users.map((user) => (
-          <div key={user._id} className="user-item">
-            <h2>{user.username}</h2>
-            <p><strong>Nombre:</strong> {user.firstName}</p>
-            <p><strong>Apellido:</strong> {user.lastName}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Password:</strong> {user.password}</p>
-            <button onClick={() => handleEditUser(user)}>Editar</button>
-            <button onClick={() => handleDeleteUser(user._id)}>Borrar</button>
-          </div>
-        ))}
+        {users && users.length > 0 ? (
+          users.map((user) => (
+            <div key={user._id} className="user-item">
+              <h2>{user.username}</h2>
+              <p><strong>Nombre:</strong> {user.firstName}</p>
+              <p><strong>Apellido:</strong> {user.lastName}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Password:</strong> {user.password}</p>
+              <button onClick={() => handleEditUser(user)}>Editar</button>
+              <button onClick={() => handleDeleteUser(user._id)}>Borrar</button>
+            </div>
+          ))
+        ) : (
+          <p>No hay usuarios disponibles.</p>
+        )}
       </div>
 
       <EditModalForm

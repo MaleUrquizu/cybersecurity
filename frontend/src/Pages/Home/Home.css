@@ -1,0 +1,9 @@
+.container {
+    background-image: url('file:///C:/Users/Administrator/Downloads/matthew-moisant-sIPRbIj9Oo8-unsplash%20(3).svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(1px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

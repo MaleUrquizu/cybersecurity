@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Register/Register.css';
 
@@ -11,19 +11,29 @@ const Register = ({ isOpen, onClose }) => {
     email: "",
   });
 
-
   const [error, setError] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
+  const [isRegister, setIsRegister] = useState(true);
   const [success, setSuccess] = useState('');
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Verificar si el token tiene el rol de administrador (ajusta la lógica según tu estructura de token)
+      const roles = token.roles; // Aquí asumimos que el token contiene información sobre roles
+      if (roles && roles.includes('admin')) {
+        setIsAdmin(true);
+      }
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     let { name, value } = e.target;
     let newDatos = { ...datos, [name]: value };
     setDatos(newDatos);
   };
-
 
   const resetState = () => {
     setDatos({
@@ -38,40 +48,38 @@ const Register = ({ isOpen, onClose }) => {
     setConfirmPassword("");
   };
 
-
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
   };
-
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!e.target.checkValidity()) {
       console.log("no enviar");
     } else {
-      if (!isLogin && datos.password !== confirmPassword) {
+      if (!isAdmin) {
+        console.error('No tienes permisos para registrar usuarios.');
+        return;
+      } else if (!isRegister && datos.password !== confirmPassword) {
         setError("Las contraseñas no coinciden.");
         return;
-      } else if (!isLogin && !validatePassword(datos.password)) {
+      } else if (!isRegister && !validatePassword(datos.password)) {
         setError("La contraseña debe contener al menos 8 caracteres, una letra mayúscula, un número, una letra y un símbolo.");
         return;
-      } else if (!isLogin && !validateEmail(datos.email)) {
+      } else if (!isRegister && !validateEmail(datos.email)) {
         setError("Por favor, introduce un correo electrónico válido.");
         return;
       } else {
         try {
           let res;
-          if (isLogin) {
-            res = await axios.post("http://localhost:8000/user/login", datos);
-          } else {
-            res = await axios.post("http://localhost:8000/user/register", datos);
+          if (isRegister) {
+            res = await axios.post("http://localhost:8000/auth/register", datos);
           }
           console.log(res.data);
           if (res.status === 200) {
@@ -91,18 +99,16 @@ const Register = ({ isOpen, onClose }) => {
           if (error.response && error.response.data && error.response.data.message) {
             setError(error.response.data.message);
           } else {
-            setError('Error en el inicio de sesión o registro. Por favor, intenta de nuevo.');
+            setError('Error en el registro. Por favor, intenta de nuevo.');
           }
         }
       }
     }
   };
 
-
   if (!isOpen) {
     return null;
   }
-
 
   return (
     <div className="registro">
@@ -114,43 +120,40 @@ const Register = ({ isOpen, onClose }) => {
           }}>
             x
           </button>
-          <h2 className="registration">{isLogin ? 'Inicio de sesión' : 'Registro'}</h2>
-
+          <h2 className="registration">Registro</h2>
         </div>
-        <form className='form-register' onSubmit={(e) => handleSubmit(e)} >
-          <label className="registros">
-            Usuario:
-            <input
-              type="text"
-              name="username"
-              value={datos.username}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-          <label className="registros">
-            Contraseña:
-            <input
-              type="password"
-              name="password"
-              value={datos.password}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-          {!isLogin && (
+        {isAdmin ? (
+          <form className='form-register' onSubmit={(e) => handleSubmit(e)}>
             <label className="registros">
-              Confirmar contraseña:
+              Usuario:
               <input
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="text"
+                name="username"
+                value={datos.username}
+                onChange={handleInputChange}
                 required
               />
             </label>
-          )}
-          {!isLogin && (
+            <label className="registros">
+              Nombre:
+              <input
+                type="text"
+                name="firstName"
+                value={datos.firstName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label className="registros">
+              Apellido:
+              <input
+                type="text"
+                name="lastName"
+                value={datos.lastName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
             <label className="registros">
               Correo electrónico:
               <input
@@ -161,30 +164,39 @@ const Register = ({ isOpen, onClose }) => {
                 required
               />
             </label>
-          )}
-          <button className="register-login" type="submit">
-            {isLogin ? 'Iniciar sesión' : 'Registrarme'}
-          </button>
-          {error && <p className="error-message">{error}</p>}
-          {success && <p className="success-message">{success}</p>}
-        </form>
-        <p>
-          {isLogin ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?'}{' '}
-          <button
-            className="login-register"
-            onClick={() => {
-              resetState();
-              setIsLogin(!isLogin);
-            }}
-          >
-            {isLogin ? 'Regístrate' : 'Inicia sesión'}
-          </button>
-        </p>
+            <label className="registros">
+              Contraseña:
+              <input
+                type="password"
+                name="password"
+                value={datos.password}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label className="registros">
+              Confirmar contraseña:
+              <input
+                type="password"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </label>
+          </form>
+        ) : (
+          <p>No tienes permisos para registrar usuarios.</p>
+        )}
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
       </div>
     </div>
   );
 };
+
 export default Register;
+
 
 
 

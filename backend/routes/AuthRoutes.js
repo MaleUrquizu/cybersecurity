@@ -2,22 +2,22 @@ import express from 'express';
 const authRouter = express.Router();
 
 import * as authCtrl from '../controllers/AuthController.js';
-import { verifySingup, validateRegister} from '../middlewares/index.js';
+import { verifySingup, validateRegister , authJwt} from '../middlewares/index.js';
 
 
-authRouter.post('/register',[verifySingup.checkDuplicateUsernameOrEmail, verifySingup.checkRolesExisted, validateRegister.validateRegister, validateRegister.validate], authCtrl.Register);
+authRouter.post('/register',[verifySingup.checkDuplicateUsernameOrEmail, verifySingup.checkRolesExisted, validateRegister.validateRegister, validateRegister.validate], [authJwt.verifyToken, authJwt.isAdmin], authCtrl.Register);
 
 // Ruta para obtener todos los usuarios
 authRouter.get('/users', authCtrl.GetAllUsers);
 
 // Ruta para obtener un usuario por su ID
-authRouter.get('/users/:id', authCtrl.GetUserById);
+authRouter.get('/users/:id', [authJwt.verifyToken, authJwt.isAdmin],  authCtrl.GetUserById);
 
 // Ruta para actualizar un usuario por su ID
-authRouter.put('/users/:id', authCtrl.UpdateUserById);
+authRouter.put('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.UpdateUserById);
 
 // Ruta para eliminar un usuario por su ID
-authRouter.delete('/users/:id', authCtrl.DeleteUserById);
+authRouter.delete('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.DeleteUserById);
 
 
 authRouter.post('/login', [validateRegister.validateLogin, validateRegister.validate], authCtrl.Login);

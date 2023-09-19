@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import '../Header/Header.css';
-import Login from '../Login/Login.jsx';
+import Register from '../Register/Register.jsx'
 
-export const Header = () => {
+export const HeaderRegister = () => {
     return (
         <div>
-            <Menu />
+            <MenuRegister />
         </div>
     )
 }
 
-function Menu() {
-    //LOGIN
+function MenuRegister() {
+    //REGISTER
     const [isModalOpen, setIsModalOpen] = useState(false)
 
 
@@ -28,9 +28,9 @@ function Menu() {
         <div className="header">
             <div className="menu">
                 <div className="register">
-                    <button className="registro-icon" onClick={handleOpenModal}>Login
+                    <button className="registro-icon" onClick={handleOpenModal}>Register
                     </button>
-                    <Login isOpen={isModalOpen} onClose={handleCloseModal} />
+                    <Register isOpen={isModalOpen} onClose={handleCloseModal} />
                 </div>
             </div>
         </div>
