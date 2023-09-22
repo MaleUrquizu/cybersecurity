@@ -152,3 +152,26 @@ export const Login = async (req, res) => {
      res.json({ token, roles });
 
 }
+
+
+//LOGOUT
+
+
+// authController.js
+
+export const logout = async (req, res) => {
+    try {
+      // Borra la cookie de sesión (esto es un ejemplo, adapta a tu sistema)
+      res.clearCookie('token'); // Si estás utilizando cookies
+  
+      // O elimina el token del almacenamiento local del navegador (si lo estás utilizando)
+      // localStorage.removeItem('token');
+  
+      res.json({ message: "Sesión cerrada exitosamente" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al cerrar sesión' });
+    }
+  };
+  
+  

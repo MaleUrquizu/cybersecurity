@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
                 // Actualizar el estado de autenticación
                 setIsAuthenticated(true);
 
-                // Obtener los roles del usuario desde la respuesta del servidor
+                // Obtener los roles del user desde la respuesta del servidor
                 const roles = response.data.roles || [];
                 setUserRoles(roles);
 
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem("token");
 
         if (token) {
-            // Si hay un token, puedes considerar al usuario como autenticado
+            // Si hay un token, puedes considerar al user como autenticado
             setIsAuthenticated(true);
         }
 
@@ -75,3 +75,76 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
     return useContext(AuthContext);
 };
+
+
+
+/*import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { setToken, deleteToken, getToken, initAxiosInterceptors } from './AuthHelpers.jsx';
+
+// Define el contexto de autenticación
+const AuthContext = React.createContext();
+
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null); // No sabemos si hay un usuario autenticado
+    const [cargandoUser, setCargandoUser] = useState(true);
+
+    initAxiosInterceptors();
+
+    useEffect(() => {
+        async function cargarUser() {
+            if (!getToken()) {
+                setCargandoUser(false);
+                return;
+            }
+            try {
+                const { data } = await axios.get('http://127.0.0.1:8000/auth/users');
+                setUser(data.user);
+                setCargandoUser(false);
+            } catch (error) {
+                console.error('Error al cargar el usuario:', error);
+            }
+        }
+        cargarUser();
+    }, []);
+
+    const login = async (email, password) => {
+        try {
+          const response = await axios.post("http://127.0.0.1:8000/auth/login", {
+            email,
+            password,
+          });
+          const { user, token } = response.data;
+          setUser(user);
+          setToken(token);
+          
+          return user; // Devuelve el objeto del usuario después de iniciar sesión
+        } catch (error) {
+          console.error('Error al iniciar sesión:', error);
+          throw error;
+        }
+      };
+
+    function logout() {
+        setUser(null);
+        deleteToken();
+    }
+
+    const contextValue = {
+        user,
+        cargandoUser,
+        login,
+        logout,
+    };
+
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+// Define un hook personalizado para acceder al contexto de autenticación
+export const useAuth = () => {
+    return useContext(AuthContext);
+};*/

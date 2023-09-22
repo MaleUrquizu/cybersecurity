@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Logout from '../../Components/Logout/Logout';
 
 
 function User() {
@@ -13,7 +14,11 @@ function User() {
   }, []);
 
   return (
+    
     <div>
+      <div>
+       <Logout /> 
+      </div>
       <h1>Formuarios de contacto recibidos</h1>
       <div className="form-cards">
         {forms.map((form) => (

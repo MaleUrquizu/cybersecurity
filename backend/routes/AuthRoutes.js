@@ -21,6 +21,7 @@ authRouter.delete('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl
 
 
 authRouter.post('/login', [validateRegister.validateLogin, validateRegister.validate], authCtrl.Login);
+authRouter.post('/logout', authCtrl.logout);
 
 
 export default authRouter;

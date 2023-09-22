@@ -21,8 +21,7 @@ const Register = ({ isOpen, onClose }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // Verificar si el token tiene el rol de administrador (ajusta la lógica según tu estructura de token)
-      const roles = token.roles; // Aquí asumimos que el token contiene información sobre roles
+      const roles = token.roles; 
       if (roles && roles.includes('admin')) {
         setIsAdmin(true);
       }

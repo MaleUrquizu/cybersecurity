@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Admin from './Pages/Admin/Admin';
 import User from './Pages/User/User';
 import { Home } from './Pages/Home/Home';
-import { useAuth } from './Context/AuthContext';
+import { useAuth } from './Context/AuthContext.jsx';
 
 const ProtectedRoute = ({ element, isAuthenticated }) => {
     return isAuthenticated ? element : <Navigate to="/" />;

@@ -15,6 +15,7 @@
     width: 300px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     margin-top: 0;
+    overflow: hidden;
   }
   
   .form-card h2 {
@@ -47,4 +48,51 @@
     background-color: #000; 
     color: #fff; 
   }
+
+  .user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    font-family:'Courier New', Courier, monospace;
+    margin-top: 20px;
+  }
+
+  .user-item {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: white; 
+    padding: 20px;
+    height: 260px;
+    width: 300px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    margin-top: 0;
+    overflow: hidden;
+  }
   
+  .user-item button {
+    background-color: #fd7d06; 
+    color: white; 
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px; 
+    transition: background-color 0.3s, color 0.3s;
+    font-family:'Courier New', Courier, monospace;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  }
+
+  .user-item button:last-child {
+    margin-right: 0; 
+  }
+  
+  .user-item button:hover {
+    background-color: #000; 
+    color: #fff; 
+  }
+
+  .form-card .password {
+    max-height: 40px; /* Limitar la altura de la contraseña para evitar cortes */
+    overflow: hidden;
+  }
