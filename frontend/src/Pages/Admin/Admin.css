@@ -1,98 +1,129 @@
+.button-form-users button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid blueviolet;
+  width: 140px;
+}
+
+.button-form-users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border: 2px solid red;
+  width: 140px;
+}
+
+
+
+
 .form-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    font-family:'Courier New', Courier, monospace;
-  }
-  
-  .form-card {
-    background-color: rgba(0, 0, 0, 0.7); 
-    color: white; 
-    padding: 20px;
-    height: 160px;
-    width: 300px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    margin-top: 0;
-    overflow: hidden;
-  }
-  
-  .form-card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .form-card p {
-    margin: 5px 0;
-  }
-  
-  .form-card button {
-    background-color: #fd7d06; 
-    color: white; 
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-right: 10px; 
-    transition: background-color 0.3s, color 0.3s;
-    font-family:'Courier New', Courier, monospace;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-  }
-  
-  .form-card button:last-child {
-    margin-right: 0; 
-  }
-  
-  .form-card button:hover {
-    background-color: #000; 
-    color: #fff; 
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+}
 
-  .user-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    font-family:'Courier New', Courier, monospace;
-    margin-top: 20px;
-  }
+.form-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  height: 190px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .user-item {
-    background-color: rgba(0, 0, 0, 0.7); 
-    color: white; 
-    padding: 20px;
-    height: 260px;
-    width: 300px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    margin-top: 0;
-    overflow: hidden;
-  }
-  
-  .user-item button {
-    background-color: #fd7d06; 
-    color: white; 
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-right: 10px; 
-    transition: background-color 0.3s, color 0.3s;
-    font-family:'Courier New', Courier, monospace;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-  }
+.form-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-  .user-item button:last-child {
-    margin-right: 0; 
-  }
-  
-  .user-item button:hover {
-    background-color: #000; 
-    color: #fff; 
-  }
+.form-card p {
+  margin: 5px 0;
+}
 
-  .form-card .password {
-    max-height: 40px; /* Limitar la altura de la contraseña para evitar cortes */
-    overflow: hidden;
-  }
+.form-card button {
+  background-color: #fd7d06;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Courier New', Courier, monospace;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.form-card button:last-child {
+  margin-right: 0;
+}
+
+.form-card button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 20px;
+}
+
+.user-item {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  height: 280px;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-item button {
+  background-color: #fd7d06;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Courier New', Courier, monospace;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.user-item button:last-child {
+  margin-right: 0;
+}
+
+.user-item button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.user-item p {
+  margin-bottom: 2px;
+}
+
+.user-item h2 {
+  margin-bottom: 2px;
+}
+

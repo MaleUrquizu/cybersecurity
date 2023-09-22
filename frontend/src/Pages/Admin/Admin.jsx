@@ -112,11 +112,11 @@ function Admin() {
       <div>
         <HeaderRegister />
       </div>
-      <div>
-          <button onClick={() => setShowUserList(!showUserList)}>
-            Mostrar {showUserList ? 'Formularios' : 'Usuarios'}
-          </button>
-        </div>
+      <div className="button-form-users">
+        <button onClick={() => setShowUserList(!showUserList)}>
+          Mostrar {showUserList ? 'Formularios' : 'Usuarios'}
+        </button>
+      </div>
       <div className="form-cards">
         {showUserList ? (
           users && users.length > 0 ? (
@@ -129,7 +129,7 @@ function Admin() {
                 <p className="password">
                   <strong>Password:</strong>
                   {passwordVisibility[user._id] ? user.password : '••••••••••'}
-                  </p>
+                </p>
                 <button onClick={() => handleEditUser(user)}>Editar</button>
                 <button onClick={() => handleDeleteUser(user._id)}>Borrar</button>
                 <button onClick={() => togglePasswordVisibility(user._id)}>
