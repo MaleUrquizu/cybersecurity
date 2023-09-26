@@ -5,19 +5,19 @@ import * as authCtrl from '../controllers/AuthController.js';
 import { verifySingup, validateRegister , authJwt} from '../middlewares/index.js';
 
 
-authRouter.post('/register',[verifySingup.checkDuplicateUsernameOrEmail, verifySingup.checkRolesExisted, validateRegister.validateRegister, validateRegister.validate], [authJwt.verifyToken, authJwt.isAdmin], authCtrl.Register);
+authRouter.post('/register',[verifySingup.checkDuplicateUsernameOrEmail, verifySingup.checkRolesExisted, validateRegister.validateRegister, validateRegister.validate], /*[authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.Register);
 
 // Ruta para obtener todos los usuarios
 authRouter.get('/users', authCtrl.GetAllUsers);
 
 // Ruta para obtener un usuario por su ID
-authRouter.get('/users/:id', [authJwt.verifyToken, authJwt.isAdmin],  authCtrl.GetUserById);
+authRouter.get('/users/:id', /*[authJwt.verifyToken, authJwt.isAdmin], */ authCtrl.GetUserById);
 
 // Ruta para actualizar un usuario por su ID
-authRouter.put('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.UpdateUserById);
+authRouter.put('/users/:id', /*[authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.UpdateUserById);
 
 // Ruta para eliminar un usuario por su ID
-authRouter.delete('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.DeleteUserById);
+authRouter.delete('/users/:id',/* [authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.DeleteUserById);
 
 
 authRouter.post('/login', [validateRegister.validateLogin, validateRegister.validate], authCtrl.Login);

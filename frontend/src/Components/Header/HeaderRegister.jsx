@@ -24,13 +24,18 @@ function MenuRegister() {
         setIsModalOpen(false)
     }
 
+    const updateUsersList = (newUser) => {
+        console.log('Usuario actualizado en el componente padre:', newUser);
+        setUsers((prevUsers) => [...prevUsers, newUser]);
+    };
+
     return (
         <div className="header">
             <div className="menu">
                 <div className="register">
                     <button className="registro-icon" onClick={handleOpenModal}>Register
                     </button>
-                    <Register isOpen={isModalOpen} onClose={handleCloseModal} />
+                    <Register isOpen={isModalOpen} onClose={handleCloseModal} updateUsersList={updateUsersList}  />
                 </div>
             </div>
         </div>

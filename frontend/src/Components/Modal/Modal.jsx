@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+import '../Modal/Modal.css'
 
-Modal.setAppElement('#root'); // Ajusta el elemento raíz de tu aplicación
+Modal.setAppElement('#root'); 
 
 function EditModalForm({ isOpen, onClose, onSave, formData }) {
     const [editedData, setEditedData] = React.useState(formData || {});
@@ -20,8 +21,7 @@ function EditModalForm({ isOpen, onClose, onSave, formData }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
-      {/* Contenido del modal de edición */}
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal-custom-style" >
       <h1>Editar Formulario</h1>
       <input
         type="text"
@@ -47,22 +47,24 @@ function EditModalForm({ isOpen, onClose, onSave, formData }) {
         value={editedData.Message}
         onChange={handleInputChange}
       />
+      <div>
       <button onClick={handleSave}>Guardar Cambios</button>
+      </div>
     </Modal>
   );
 }
 
 function DeleteModalForm({ isOpen, onClose, onDelete }) {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
-      <h1>¿Quieres eliminar el formulario?</h1>
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal-custom-style">
+      <h1 className='deleteModalForm'>¿Quieres eliminar el formulario?</h1>
       <button onClick={onDelete}>Confirmar Borrado</button>
     </Modal>
   );
 }
 
 function EditModalUser({ isOpen, onClose, onSave, userData }) {
-    const [editedUser, setEditedUser] = React.useState(userData || {}); // Si userData es null, se inicializa como un objeto vacío
+    const [editedUser, setEditedUser] = React.useState(userData || {}); 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -78,8 +80,7 @@ function EditModalUser({ isOpen, onClose, onSave, userData }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
-      {/* Contenido del modal de edición */}
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal-custom-style" >
       <h1>Editar Usuario</h1>
       <input
         type="text"
@@ -87,7 +88,6 @@ function EditModalUser({ isOpen, onClose, onSave, userData }) {
         value={editedUser.username || ''}
         onChange={handleInputChange}
       />
-      {/* Agrega más campos de usuario aquí según tus necesidades */}
       <button onClick={handleSave}>Guardar Cambios</button>
     </Modal>
   );
@@ -95,11 +95,22 @@ function EditModalUser({ isOpen, onClose, onSave, userData }) {
 
 function DeleteModalUser({ isOpen, onClose, onDelete }) {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal-custom-style">
       <h1>¿Quieres eliminar al usuario?</h1>
       <button onClick={onDelete}>Confirmar Borrado</button>
     </Modal>
   );
 }
 
-export { EditModalForm, DeleteModalForm, EditModalUser, DeleteModalUser };
+function SuccessModal({ isOpen, onClose, message }) {
+  return (
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal-custom-style">
+      <h1>Solicitud exitosa</h1>
+      <p>{message}</p>
+      <button onClick={onClose}>Cerrar</button>
+    </Modal>
+  );
+}
+
+
+export { EditModalForm, DeleteModalForm, EditModalUser, DeleteModalUser, SuccessModal };

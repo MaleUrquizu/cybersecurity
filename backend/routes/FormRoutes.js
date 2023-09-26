@@ -8,7 +8,7 @@ const FormRouter = express.Router();
 FormRouter.post('/', createForm);
 FormRouter.get('/', getForms)
 FormRouter.get('/:id', getForms)
-FormRouter.put ('/:id', [authJwt.verifyToken, authJwt.isAdmin], updateForm )
-FormRouter.delete ('/:id', [authJwt.verifyToken, authJwt.isAdmin], deleteform)
+FormRouter.put ('/:id', /*[authJwt.verifyToken, authJwt.isAdmin], */updateForm )
+FormRouter.delete ('/:id',/* [authJwt.verifyToken, authJwt.isAdmin],*/ deleteform)
 
 export default FormRouter
