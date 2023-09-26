@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../Header/Header.css';
-import Register from '../Register/Register.jsx'
+import Register from '../Register/Register.jsx';
+
+
 
 export const HeaderRegister = () => {
     return (
@@ -24,18 +26,13 @@ function MenuRegister() {
         setIsModalOpen(false)
     }
 
-    const updateUsersList = (newUser) => {
-        console.log('Usuario actualizado en el componente padre:', newUser);
-        setUsers((prevUsers) => [...prevUsers, newUser]);
-    };
 
     return (
         <div className="header">
             <div className="menu">
                 <div className="register">
-                    <button className="registro-icon" onClick={handleOpenModal}>Register
-                    </button>
-                    <Register isOpen={isModalOpen} onClose={handleCloseModal} updateUsersList={updateUsersList}  />
+                    <button className="registro-icon" onClick={handleOpenModal}>Register</button>
+                    <Register isOpen={isModalOpen} onClose={handleCloseModal} />
                 </div>
             </div>
         </div>

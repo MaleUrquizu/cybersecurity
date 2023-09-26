@@ -20,7 +20,6 @@ function Admin() {
   const [successMessage, setSuccessMessage] = useState('');
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
-
   useEffect(() => {
     fetch('http://localhost:8000/form')
       .then((response) => response.json())
@@ -153,11 +152,13 @@ function Admin() {
     }));
   };
 
+  
+
   return (
     <div>
       <div className='button-logout-register'>
+        <HeaderRegister /> 
         <Logout />
-        <HeaderRegister />
       </div>
       <div>
         <div className="button-form-users">
