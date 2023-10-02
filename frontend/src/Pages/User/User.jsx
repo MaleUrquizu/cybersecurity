@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Logout from '../../Components/Logout/Logout';
+import '../User/User.css';
 
 
 function User() {
@@ -16,10 +17,10 @@ function User() {
   return (
     
     <div>
-      <div>
+      <div className="logout-user">
        <Logout /> 
       </div>
-      <h1>Formuarios de contacto recibidos</h1>
+      <h1 className='title-user'>Formuarios de contacto recibidos</h1>
       <div className="form-cards">
         {forms.map((form) => (
           <div key={form._id} className="form-card">

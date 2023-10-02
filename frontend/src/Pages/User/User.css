@@ -1,0 +1,13 @@
+.logout-user {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 60px;
+}
+
+.title-user {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}

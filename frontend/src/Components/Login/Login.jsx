@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../Register/Register.css';
+import '../Login/Login.css';
 
 const Login = ({ isOpen, onClose }) => {
   const [datos, setDatos] = useState({
@@ -82,19 +82,19 @@ const Login = ({ isOpen, onClose }) => {
   }
 
   return (
-    <div className="registro">
-      <div className="registro-content">
-        <div className="registration">
-          <button className="registration-x" onClick={() => {
+    <div className="login">
+      <div className="login-content">
+        <div className="close">
+          <button className="close-x" onClick={() => {
             resetState();
             onClose();
           }}>
             x
           </button>
-          <h2 className="registration"> Inicio de sesión</h2>
-        </div>
-        <form className='form-register' onSubmit={(e) => handleSubmit(e)} >
-          <label className="registros">
+          </div>
+          <h2 className="title-login"> Inicio de sesión</h2>
+        <form className='form-login' onSubmit={(e) => handleSubmit(e)} >
+          <label className="register-login">
             Correo electrónico:
             <input
               type="email"
@@ -104,7 +104,7 @@ const Login = ({ isOpen, onClose }) => {
               required
             />
           </label>
-          <label className="registros">
+          <label className="register-login">
             Contraseña:
             <input
               type="password"
@@ -114,7 +114,7 @@ const Login = ({ isOpen, onClose }) => {
               required
             />
           </label>
-          <button className="register-login" type="submit">
+          <button className="login-button" type="submit">
             Iniciar sesión
           </button>
           {error && <p className="error-message">{error}</p>}
