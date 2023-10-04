@@ -1,108 +1,6 @@
-/*import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import ReCAPTCHA from 'react-google-recaptcha';
-
-const Form = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-
-  const captcha = useRef(null);
-
-  const onChange = () => {
-    if(captcha.current.getValue()){
-    console.log('Es humano');
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log('Valores de los campos:', email, name, subject, message, captcha.current.getValue());
-
-    try {
-      const response = await axios.post('http://localhost:8000/form/', {
-        email,
-        name,
-        subject,
-        message,
-        recaptchaToken: captcha.current.getValue(),
-      });
-      
-      console.log('Server response:', response.data);
-
-      // Reiniciar los campos del formulario
-      setEmail('');
-      setName('');
-      setSubject('');
-      setMessage('');
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
-  return (
-    <div>
-      <h2>Contact Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <textarea
-            placeholder="Message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <ReCAPTCHA
-            ref={captcha}
-            sitekey="6LfPQf8nAAAAAOh61ZTLrXVLudGvOHZZ50kNN05W"
-            onChange={onChange}
-          />
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default Form;*/
-
-
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Modal from 'react-modal';
 import '../Form/Form.css';
 
 function Form() {
@@ -116,17 +14,55 @@ function Form() {
     recaptchaToken: '', 
   });
 
+  const resetForm = () => {
+    setFormData({
+      Email: '',
+      Name: '',
+      Subject: '',
+      Message: '',
+      botField: '',
+      xssField: '',
+      recaptchaToken: '',
+    });
+  };  
+
   const [formErrors, setFormErrors] = useState({
     Email: '',
     Name: '',
     Subject: '',
     Message: '',
   });
+  
+  
+  const [modalSuccessIsOpen, setModalSuccessIsOpen] = useState(false); 
+  const [modalErrorIsOpen, setModalErrorIsOpen] = useState(false); 
+
+  const openSuccessModal = () => {
+    setModalSuccessIsOpen(true);
+  };
+
+  const closeSuccessModal = () => {
+    setModalSuccessIsOpen(false);
+  };
+
+  const openErrorModal = () => {
+    setModalErrorIsOpen(true);
+  };
+
+  const closeErrorModal = () => {
+    setModalErrorIsOpen(false);
+  };
 
   const captcha = useRef(null);
 
   const onChange = (token) => {
     setFormData({ ...formData, recaptchaToken: token });
+  };
+
+  const resetCaptcha = () => {
+    if (captcha.current) {
+      captcha.current.reset(); // Resetea el reCAPTCHA
+    }
   };
 
   const validateFormFields = () => {
@@ -189,10 +125,12 @@ function Form() {
 
       if (response.ok) {
         // El formulario se envió con éxito, puedes redirigir o mostrar un mensaje de éxito
-        alert('Formulario enviado con éxito');
+        openSuccessModal();
+        resetForm();
+        resetCaptcha();
       } else {
         // Manejar errores de respuesta del servidor si es necesario
-        alert('Error al enviar el formulario');
+        openErrorModal();
       }
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
@@ -271,6 +209,29 @@ function Form() {
       </div>
       <button className='button-form' type="submit">Submit</button>
     </form>
+    {/* Modal de éxito */}
+    <Modal
+        isOpen={modalSuccessIsOpen}
+        onRequestClose={closeSuccessModal}
+        contentLabel="Formulario Enviado con Éxito"
+        className="modal-background"
+      >
+        <h2>Formulario Enviado con Éxito</h2>
+        <p>Tu formulario se ha enviado correctamente.</p>
+        <button onClick={closeSuccessModal}>Cerrar</button>
+      </Modal>
+
+      {/* Modal de error */}
+      <Modal
+        isOpen={modalErrorIsOpen}
+        onRequestClose={closeErrorModal}
+        contentLabel="Error al Enviar el Formulario"
+        className="modal-background"
+      >
+        <h2>Error al Enviar el Formulario</h2>
+        <p>Hubo un problema al enviar el formulario.</p>
+        <button onClick={closeErrorModal}>Cerrar</button>
+      </Modal>
     </div>
   );
 }

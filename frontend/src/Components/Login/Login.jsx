@@ -67,7 +67,9 @@ const Login = ({ isOpen, onClose }) => {
         }
       } catch (error) {
         console.error(error);
-        if (error.response && error.response.data && error.response.data.message) {
+        if (error.response && error.response.status === 429) {
+          setError('Demasiados intentos de inicio de sesión. Inténtalo de nuevo más tarde.');
+        } else if (error.response && error.response.data && error.response.data.message) {
           setError(error.response.data.message);
         } else {
           setError('Error en el inicio de sesión. Por favor, intenta de nuevo.');

@@ -32,7 +32,7 @@ app.listen(8000, () => {
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import './database/db.js'
+import './database/db.js';
 
 import FormRouter from './routes/FormRoutes.js';
 import authRouter from './routes/AuthRoutes.js';
@@ -40,6 +40,7 @@ import UserRoutes from './routes/UserRoutes.js';
 import AdminRoutes from './routes/AdminRoutes.js';
 import { createRoles } from './libs/initialSetup.js';
 import { authJwt } from './middlewares/index.js';
+import limiter from './middlewares/limiter.js';
 
 const app = express();
 createRoles();
@@ -50,7 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Rutas públicas (no requieren autenticación)
-app.use('/form', FormRouter);
+app.use('/form', limiter, FormRouter);
 
 // Rutas de inicio de sesión (no aplicar el middleware de autenticación)
 app.use('/auth', authRouter);
