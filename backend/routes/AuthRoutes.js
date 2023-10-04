@@ -21,19 +21,10 @@ authRouter.put('/users/:id', /*[authJwt.verifyToken, authJwt.isAdmin],*/ authCtr
 authRouter.delete('/users/:id',/* [authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.DeleteUserById);
 
 
-authRouter.post('/login', [validateRegister.validateLogin, validateRegister.validate], loginLimiter, (req, res, next) => {
-    // Verifica si el usuario ha alcanzado el límite de intentos
-    if (req.rateLimit.remaining === 0) {
-      // El usuario ha excedido el límite de intentos, puedes redirigirlo a una página de error
-      return res.status(429).json({ message: 'Demasiados intentos de inicio de sesión. Inténtalo de nuevo más tarde.' });
-    }
-  
-    // Si no ha excedido el límite, continúa con la lógica de inicio de sesión
-    authCtrl.Login(req, res, next);
-  });
+authRouter.post('/login', loginLimiter, [validateRegister.validateLogin, validateRegister.validate], authCtrl.Login);
   
 
-authRouter.post('/logout', loginLimiter, authCtrl.logout);
+authRouter.post('/logout', authCtrl.logout);
 
 
 export default authRouter;
