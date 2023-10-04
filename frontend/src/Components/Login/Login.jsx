@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext';
 import '../Login/Login.css';
 
 const Login = ({ isOpen, onClose }) => {
+  const { login } = useAuth(); 
   const [datos, setDatos] = useState({
     email: "",
     password: ""
@@ -43,9 +45,11 @@ const Login = ({ isOpen, onClose }) => {
           // Verifica si la propiedad roles existe en la respuesta
           if (res.data.roles && res.data.roles.includes('admin')) {
             console.log('Redirigiendo a /admin');
+            login({ user: res.data, role: 'admin' })
             navigate('/admin');
           } else if (res.data.roles && res.data.roles.includes('user')) {
             console.log('Redirigiendo a /user');
+            login({ user: res.data, role: 'user' });
             navigate('/user');
           } else {
             // Maneja el caso en el que roles no está definido o no contiene 'admin' ni 'user'
