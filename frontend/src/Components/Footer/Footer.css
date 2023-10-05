@@ -1,0 +1,10 @@
+.container-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    margin-top: 60px;
+    background: rgba(20, 20, 20, 0.744);
+    height: 100px;
+}
