@@ -5,6 +5,14 @@
     color: white;
     font-family:'Courier New', Courier, monospace;
     margin-top: 60px;
-    background: rgba(20, 20, 20, 0.744);
+    background: rgba(39, 38, 38, 0.888);
     height: 100px;
+}
+
+p {
+    cursor: pointer;
+}
+
+p:hover {
+    color: #fd7d06;
 }
