@@ -28,24 +28,28 @@ function EditModalForm({ isOpen, onClose, onSave, formData }) {
         name="Subject"
         value={editedData.Subject}
         onChange={handleInputChange}
+        placeholder="Subject"
       />
       <input
         type="text"
         name="Name"
         value={editedData.Name}
         onChange={handleInputChange}
+        placeholder="Name"
       />
       <input
         type="text"
         name="Email"
         value={editedData.Email}
         onChange={handleInputChange}
+        placeholder="Email"
       />
       <input
         type="text"
         name="Message"
         value={editedData.Message}
         onChange={handleInputChange}
+        placeholder="Message"
       />
       <div>
       <button onClick={handleSave}>Guardar Cambios</button>
@@ -87,6 +91,35 @@ function EditModalUser({ isOpen, onClose, onSave, userData }) {
         name="username"
         value={editedUser.username || ''}
         onChange={handleInputChange}
+        placeholder="Username"
+      />
+      <input
+        type="text"
+        name="firstName"
+        value={editedUser.firstName}
+        onChange={handleInputChange}
+        placeholder="FirstName"
+      />
+      <input
+        type="text"
+        name="lastName"
+        value={editedUser.lastName}
+        onChange={handleInputChange}
+        placeholder="LastName"
+      />
+      <input
+        type="text"
+        name="email"
+        value={editedUser.email}
+        onChange={handleInputChange}
+        placeholder="Email"
+      />
+      <input
+        type="text"
+        name="password"
+        value={editedUser.password}
+        onChange={handleInputChange}
+        placeholder="Password"
       />
       <button onClick={handleSave}>Guardar Cambios</button>
     </Modal>

@@ -123,6 +123,9 @@ function Admin() {
         if (response.ok) {
           showSuccessMessage('Usuario editado con éxito.');
           setIsEditUserModalOpen(false); 
+          setUsers((prevUsers) =>
+          prevUsers.map((user) => (user._id === userId ? { ...user, ...editedUser } : user))
+        );
         } else {
           console.error('Error al actualizar el usuario');
         }
