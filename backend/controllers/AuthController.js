@@ -149,7 +149,8 @@ export const Login = async (req, res) => {
      const roles = userFound.roles.map(role => role.name);
 
      // Incluye los roles en la respuesta
-     res.json({ token, roles });
+     res.json({ token, roles: roles }); // Asegúrate de que los roles se pasen desde el servidor
+
 
 }
 
