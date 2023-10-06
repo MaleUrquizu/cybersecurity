@@ -119,7 +119,7 @@ export const DeleteUserById = async (req, res) => {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
-        await user.remove();
+        await User.deleteOne({ _id: userId });
 
         res.status(200).json({ message: 'Usuario eliminado con éxito' });
     } catch (error) {
@@ -128,31 +128,6 @@ export const DeleteUserById = async (req, res) => {
     }
 };
 
-
-//LOGIN
-/*
-export const Login = async (req, res) => {
-
-    const userFound = await User.findOne({ email: req.body.email }).populate("roles");
-
-    if (!userFound) return res.status(400).json({ message: "Email o contraseña incorrectos" })
-
-    const matchPassword = await User.comparePassword(req.body.password, userFound.password)
-
-    if (!matchPassword) return res.status(401).json({ token: null, message: "Email o contraseña incorrectos" })
-
-    const token = jwt.sign({ id: userFound._id }, config.SECRET, {
-        expiresIn: 86400
-    })
-
-     // Obtén los roles del usuario
-     const roles = userFound.roles.map(role => role.name);
-
-     // Incluye los roles en la respuesta
-     res.json({ token, roles: roles }); // Asegúrate de que los roles se pasen desde el servidor
-}/
-
-*/
 
 export const Login = async (req, res) => {
 
@@ -170,7 +145,7 @@ export const Login = async (req, res) => {
     // Incluye los roles en la carga útil (payload) del token
     const payload = {
         id: userFound._id,
-        roles: roles // Agrega los roles aquí
+        roles: roles 
     };
 
     // Firma el token con la carga útil modificada
