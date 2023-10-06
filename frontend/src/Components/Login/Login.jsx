@@ -73,9 +73,7 @@ const Login = ({ isOpen, onClose }) => {
             console.error('Roles no definidos o no válidos en la respuesta del servidor.');
           }
         }
-        
-
-
+      
           console.log(res.data);
           if (res.status === 200) {
             resetState();

@@ -32,6 +32,8 @@ function Admin() {
       .catch((error) => console.error('Error al obtener usuarios:', error));
   }, []);
 
+  const token = localStorage.getItem('token');
+
   const handleEditForm = (form) => {
     setIsEditFormModalOpen(true);
     setEditFormData(form);
@@ -63,6 +65,7 @@ function Admin() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'x-access-token': token,
       },
       body: JSON.stringify(editedData),
     })
@@ -86,6 +89,10 @@ function Admin() {
   const handleSaveFormDelete = (formId) => {
     fetch(`http://localhost:8000/form/${formId}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token,
+      },
     })
       .then((response) => {
         if (response.ok) {
@@ -108,13 +115,14 @@ function Admin() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'x-access-token': token,
       },
       body: JSON.stringify(editedUser),
     })
       .then((response) => {
         if (response.ok) {
           showSuccessMessage('Usuario editado con éxito.');
-          setIsEditUserModalOpen(false); // Cierra el modal de edición
+          setIsEditUserModalOpen(false); 
         } else {
           console.error('Error al actualizar el usuario');
         }
@@ -127,6 +135,10 @@ function Admin() {
   const handleSaveUserDelete = (userId) => {
     fetch(`http://localhost:8000/auth/users/${userId}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token,
+      },
     })
       .then((response) => {
         if (response.ok) {

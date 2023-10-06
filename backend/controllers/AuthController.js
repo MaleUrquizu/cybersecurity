@@ -130,7 +130,7 @@ export const DeleteUserById = async (req, res) => {
 
 
 //LOGIN
-
+/*
 export const Login = async (req, res) => {
 
     const userFound = await User.findOne({ email: req.body.email }).populate("roles");
@@ -150,8 +150,36 @@ export const Login = async (req, res) => {
 
      // Incluye los roles en la respuesta
      res.json({ token, roles: roles }); // Asegúrate de que los roles se pasen desde el servidor
+}/
 
+*/
 
+export const Login = async (req, res) => {
+
+    const userFound = await User.findOne({ email: req.body.email }).populate("roles");
+
+    if (!userFound) return res.status(400).json({ message: "Email o contraseña incorrectos" })
+
+    const matchPassword = await User.comparePassword(req.body.password, userFound.password)
+
+    if (!matchPassword) return res.status(401).json({ token: null, message: "Email o contraseña incorrectos" })
+
+    // Obtén los roles del usuario
+    const roles = userFound.roles.map(role => role.name);
+
+    // Incluye los roles en la carga útil (payload) del token
+    const payload = {
+        id: userFound._id,
+        roles: roles // Agrega los roles aquí
+    };
+
+    // Firma el token con la carga útil modificada
+    const token = jwt.sign(payload, config.SECRET, {
+        expiresIn: 86400
+    });
+
+    // Responde con el token que ahora incluye los roles
+    res.json({ token, roles: roles });
 }
 
 

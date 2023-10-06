@@ -12,13 +12,13 @@ authRouter.post('/register',[verifySingup.checkDuplicateUsernameOrEmail, verifyS
 authRouter.get('/users', authCtrl.GetAllUsers);
 
 // Ruta para obtener un usuario por su ID
-authRouter.get('/users/:id', /*[authJwt.verifyToken, authJwt.isAdmin], */ authCtrl.GetUserById);
+authRouter.get('/users/:id', [authJwt.verifyToken, authJwt.isAdmin],  authCtrl.GetUserById);
 
 // Ruta para actualizar un usuario por su ID
-authRouter.put('/users/:id', /*[authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.UpdateUserById);
+authRouter.put('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.UpdateUserById);
 
 // Ruta para eliminar un usuario por su ID
-authRouter.delete('/users/:id',/* [authJwt.verifyToken, authJwt.isAdmin],*/ authCtrl.DeleteUserById);
+authRouter.delete('/users/:id', [authJwt.verifyToken, authJwt.isAdmin], authCtrl.DeleteUserById);
 
 
 authRouter.post('/login', loginLimiter, [validateRegister.validateLogin, validateRegister.validate], authCtrl.Login);
